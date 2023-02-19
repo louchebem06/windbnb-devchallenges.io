@@ -38,4 +38,14 @@
 		line-height: 17px;
 		color: #4F4F4F;
 	}
+
+	@media screen and (max-width: 979px) {
+		.rating p {
+			font-size: 12px;
+		}
+
+		.rating span {
+			font-size: 20px;
+		}
+	}
 </style>

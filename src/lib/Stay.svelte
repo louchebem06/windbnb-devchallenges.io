@@ -19,6 +19,7 @@
 <style>
 	.stay {
 		max-width: 395px;
+		margin-bottom: 49px;
 	}
 
 	.stay img {
@@ -37,5 +38,21 @@
 		text-align: right;
 		color: #333333;
 		text-align: left;
+	}
+
+	@media screen and (max-width: 979px) {
+		.stay {
+			max-width: 300px;
+			margin-bottom: 32px;
+		}
+
+		.stay img {
+			width: 300px;
+			height: 200px;
+		}
+
+		.stay h2 {
+			font-size: 14px;
+		}
 	}
 </style>

@@ -23,4 +23,10 @@
 		line-height: 17px;
 		color: #828282;
 	}
+
+	@media screen and (max-width: 979px) {
+		p {
+			font-size: 12px;
+		}
+	}
 </style>
