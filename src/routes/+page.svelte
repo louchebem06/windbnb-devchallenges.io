@@ -60,8 +60,15 @@
 
 <style>
 	.content {
-		margin: 32px 90px;
+		margin: 32px auto;
 		padding-bottom: 50px;
+		max-width: 1400px;
+	}
+
+	@media screen and (max-width: 1440px) {
+		.content {
+			margin: 32px 96px;
+		}
 	}
 
 	@media screen and (max-width: 979px) {
