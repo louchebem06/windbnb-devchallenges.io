@@ -10,7 +10,7 @@
 		country: string
 	};
 
-	let clicked: boolean = true;
+	let clicked: boolean = false;
 
 	let people: any;
 	let select: any;
