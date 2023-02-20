@@ -3,11 +3,14 @@
   	import Signature from "$lib/Signature.svelte";
   	import Stays from "$lib/Stays.svelte";
 	import type { Stay as StrayInterface} from "$lib/Stay";
+	import Header from "$lib/Header.svelte";
 
 	interface City {
 		city: string,
 		country: string
 	};
+
+	let clicked: boolean = true;
 
 	let people: any;
 	let select: any;
@@ -42,7 +45,7 @@
 	<title>WindBnb</title>
 </svelte:head>
 
-<input bind:this={people} value={0} min=0 type="number" />
+<!-- <input bind:this={people} value={0} min=0 type="number" />
 <select bind:this={select} >
 	<option value="Finland">Finland</option>
 	{#each citys as c}
@@ -50,19 +53,48 @@
 	{/each}
 </select>
 
-<button on:click={search}>search</button>
+<button on:click={search}>search</button> -->
+
+<Header bind:clicked={clicked}/>
+
+{#if clicked}
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div class="opacity" on:click={() => clicked = false}></div>
+{/if}
 
 <div class="content">
 	<Stays bind:stays={staysSearch}/>
 </div>
-<Signature />
 
+<Signature />
 
 <style>
 	.content {
 		margin: 32px auto;
+		margin-top: 61px;
 		padding-bottom: 50px;
 		max-width: 1400px;
+	}
+
+	@keyframes clearToBlack {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 0.8;
+		}
+	}
+
+	.opacity{
+		content: " ";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: black;
+		opacity: 0.8;
+		animation: normal 0.5s clearToBlack;
 	}
 
 	@media screen and (max-width: 1440px) {
