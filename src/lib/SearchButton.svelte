@@ -37,5 +37,15 @@
 		justify-content: center;
 		align-items: center;
 		gap: 11px;
+		margin: auto;
+	}
+
+	@media screen and (max-width: 768px) {
+		.big {
+			position: absolute;
+			bottom: -69vh;
+			left: 50%;
+			transform: translate(-50%);
+		}
 	}
 </style>

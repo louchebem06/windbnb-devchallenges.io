@@ -1,12 +1,14 @@
 <script lang="ts">
-  import SearchBar from "./SearchBar.svelte";
+	import type { City } from "$lib/City";
+	import SearchBar from "./SearchBar.svelte";
 
-  export let clicked: boolean;
+	export let clicked: boolean;
+	export let citys: City[];
 </script>
 
 <header>
 	<img src="/logo.svg" alt="" class:minus={clicked}/>
-	<SearchBar bind:clicked={clicked}/>
+	<SearchBar bind:clicked={clicked} bind:citys={citys}/>
 </header>
 
 <style>

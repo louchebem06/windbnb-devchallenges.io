@@ -4,11 +4,7 @@
   	import Stays from "$lib/Stays.svelte";
 	import type { Stay as StrayInterface} from "$lib/Stay";
 	import Header from "$lib/Header.svelte";
-
-	interface City {
-		city: string,
-		country: string
-	};
+	import type { City } from "$lib/City";
 
 	let clicked: boolean = false;
 
@@ -29,6 +25,7 @@
 		if (!isset)
 			citys.push(tmp);
 	});
+	citys = citys.slice();
 
 	function search() {
 		city = select.value;
@@ -55,7 +52,7 @@
 
 <button on:click={search}>search</button> -->
 
-<Header bind:clicked={clicked}/>
+<Header bind:clicked={clicked} bind:citys={citys}/>
 
 {#if clicked}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->

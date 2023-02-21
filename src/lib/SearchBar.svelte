@@ -1,12 +1,33 @@
 <script lang="ts">
+	import type { City } from "$lib/City";
 	import SearchButton from "./SearchButton.svelte";
-  import Select from "./Select.svelte";
+	import Select from "./Select.svelte";
 
 	export let clicked: boolean;
+	export let citys: City[];
+	
+	let selectedLocation: boolean = false;
+	let selectedGuests: boolean = false;
+
+	function setLocation() {
+		selectedLocation = true;
+		selectedGuests = false;
+	}
+
+	function setGuests() {
+		selectedGuests = true;
+		selectedLocation = false;
+	}
+
+	function unSelected() {
+		selectedGuests = false;
+		selectedLocation = false;
+	}
 </script>
 
 {#if clicked}
-	<div class="backgroundSearchBar">
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div on:click={unSelected} class="backgroundSearchBar">
 		<div class="headerBackgroundSearch">
 			<p>Edit your search</p>
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -18,9 +39,22 @@
 {/if}
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div on:click={() => {clicked=true}} class="searchBar" class:big={clicked}>
-	<Select />
-	<Select />
-	<SearchButton bind:big={clicked}/>
+	<Select
+		bind:big={clicked}
+		title="Location"
+		location={true}
+		bind:selected={selectedLocation}
+		selectedFn={setLocation}
+		elements={citys}
+	/>
+	<Select
+		bind:big={clicked}
+		title="Guests"
+		location={false}
+		bind:selected={selectedGuests}
+		selectedFn={setGuests}
+	/>
+	<SearchButton bind:big={clicked} />
 </div>
 
 <style>
@@ -50,6 +84,8 @@
 		animation: normal 0.5s normalToBig;
 		z-index: 2;
 		cursor: default;
+		justify-content: flex-start;
+		position: relative;
 	}
 
 	@keyframes backgroundSearchBarFadeIn {
