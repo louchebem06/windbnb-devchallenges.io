@@ -12,8 +12,10 @@
 <style>
 	header {
 		max-width: 1400px;
-		margin: auto;
+		margin: auto auto;
 		padding-top: 61px;
+		padding-left: 20px;
+		padding-right: 20px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -38,5 +40,17 @@
 	.minus {
 		animation: normal 1s normalToBig;
 		width: 0;
+	}
+
+	@media screen and (max-width: 500px) {
+		header {
+			flex-direction: column;
+		}
+
+		header img {
+			position: absolute;
+			top: 19px;
+			left: 13px;
+		}
 	}
 </style>

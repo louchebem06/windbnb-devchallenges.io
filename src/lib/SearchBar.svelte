@@ -1,13 +1,26 @@
 <script lang="ts">
+	import SearchButton from "./SearchButton.svelte";
+  import Select from "./Select.svelte";
+
 	export let clicked: boolean;
 </script>
 
 {#if clicked}
-	<div class="backgroundSearchBar"></div>
+	<div class="backgroundSearchBar">
+		<div class="headerBackgroundSearch">
+			<p>Edit your search</p>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<span class="material-symbols-rounded" on:click={() => clicked = false}>
+				close
+			</span>
+		</div>
+	</div>
 {/if}
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div on:click={() => {clicked=true}} class="searchBar" class:big={clicked}>
-
+	<Select />
+	<Select />
+	<SearchButton bind:big={clicked}/>
 </div>
 
 <style>
@@ -18,6 +31,9 @@
 		width: 297px;
 		height: 55px;
 		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: space-around;
 	}
 
 	@keyframes normalToBig {
@@ -88,5 +104,50 @@
 		left: 0;
 		opacity: 1;
 		animation: normal 1s backgroundSearchBarFadeIn;
+	}
+
+	.headerBackgroundSearch {
+		opacity: 0;
+		position: absolute;
+		top: 18px;
+		left: 22px;
+		display: flex;
+		width: calc(100% - 44px);
+		justify-content: space-between;
+		align-items: center;
+		color: #333333;
+		font-weight: 700;
+		font-size: 12px;
+		line-height: 15px;
+	}
+
+	@media screen and (max-width: 768px) {
+		.headerBackgroundSearch {
+			opacity: 1;
+		}
+
+		.backgroundSearchBar {
+			height: 90vh;
+			animation: none;
+		}
+	}
+
+	@media screen and (max-width: 500px) {
+		.searchBar {
+			margin: 20px auto;
+			width: 90%;
+		}
+
+		.backgroundSearchBar {
+			width: 100%;
+			height: 90vh;
+			background-color: white;
+			z-index: 1;
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 1;
+			animation: none;
+		}
 	}
 </style>
