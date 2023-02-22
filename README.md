@@ -1,7 +1,5 @@
 <!-- Please update value in the {}  -->
 
-WIP
-
 <h1 align="center">WindBnb</h1>
 
 <div align="center">
