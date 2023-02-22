@@ -28,7 +28,7 @@ WIP
 
 ## Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+<img width="1705" alt="Capture d’écran 2023-02-22 à 20 30 15" src="https://user-images.githubusercontent.com/34492446/220738538-28f8fe76-c797-4dca-9480-ef224eb8b5c4.png">
 
 ### Built With
 
