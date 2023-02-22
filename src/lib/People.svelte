@@ -1,15 +1,19 @@
 <script lang="ts">
-	export let value: number;
 	export let title: string;
 	export let subTitle: string;
+	export let people: number;
+	export let value: number;
 
 	function minus() {
-		if (value > 0)
+		if (value > 0) {
 			value--;
+			people--;
+		}
 	}
 
 	function plus() {
 		value++;
+		people++;
 	}
 </script>
 

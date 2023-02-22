@@ -2,9 +2,11 @@
 	import type { City } from "$lib/City";
 	
 	export let element: City;
+	export let city: City|undefined;
 </script>
 
-<div class="locate">
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div class="locate" on:click={() => {city = element}}>
 	<span class="material-symbols-rounded">
 		location_on
 	</span>

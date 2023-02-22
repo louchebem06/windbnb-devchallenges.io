@@ -1,8 +1,9 @@
 <script lang="ts">
 	export let big: boolean;
+	export let fnSearch: any;
 </script>
 
-<button class:big={big}>
+<button class:big={big} on:click={fnSearch}>
 	<span class="material-symbols-rounded">
 		search
 	</span>
@@ -43,7 +44,7 @@
 	@media screen and (max-width: 768px) {
 		.big {
 			position: absolute;
-			bottom: -69vh;
+			top: 69vh;
 			left: 50%;
 			transform: translate(-50%);
 		}

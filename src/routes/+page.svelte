@@ -7,13 +7,14 @@
 	import type { City } from "$lib/City";
 
 	let clicked: boolean = false;
-
-	let people: any;
-	let select: any;
-	let city: string = "Finland";
+	let people: number = 0;
+	let kidPeople: number = 0;
+	let adultPeople: number = 0;
+	let city: City;
 	let citys: City[] = [];
 
 	let staysSearch: StrayInterface[] = [];
+	citys.push({city: "All", country: "finland"});
 	stays.forEach((stay: any) => {
 		staysSearch.push(stay);
 		const tmp: City = {city: stay.city, country: stay.country};
@@ -26,15 +27,15 @@
 			citys.push(tmp);
 	});
 	citys = citys.slice();
+	city = citys[0];
 
 	function search() {
-		city = select.value;
-		const beds = people?.value || 0;
-		staysSearch = [];
+		staysSearch = []
 		stays.forEach((stay: any) => {
-			if ((beds <= 1 || stay.beds >= beds) && (city == "Finland" || stay.city == city))
+			if ((stay.city == city.city || city.city == 'All')
+			&& (people <= 1 || people > 1 && stay?.beds >= people ))
 				staysSearch.push(stay);
-		});
+		})
 	}
 </script>
 
@@ -42,17 +43,15 @@
 	<title>WindBnb</title>
 </svelte:head>
 
-<!-- <input bind:this={people} value={0} min=0 type="number" />
-<select bind:this={select} >
-	<option value="Finland">Finland</option>
-	{#each citys as c}
-		<option value={c.city}>{c.city}, {c.country}</option>
-	{/each}
-</select>
-
-<button on:click={search}>search</button> -->
-
-<Header bind:clicked={clicked} bind:citys={citys}/>
+<Header
+	bind:clicked={clicked}
+	bind:citys={citys}
+	bind:people={people}
+	bind:kidPeople={kidPeople}
+	bind:adultPeople={adultPeople}
+	bind:city={city}
+	fnSearch={search}
+/>
 
 {#if clicked}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -60,7 +59,7 @@
 {/if}
 
 <div class="content">
-	<Stays bind:stays={staysSearch}/>
+	<Stays bind:stays={staysSearch} />
 </div>
 
 <Signature />

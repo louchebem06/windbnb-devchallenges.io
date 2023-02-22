@@ -4,11 +4,24 @@
 
 	export let clicked: boolean;
 	export let citys: City[];
+	export let people: number;
+	export let kidPeople: number;
+	export let adultPeople: number;
+	export let city: City;
+	export let fnSearch: any;
 </script>
 
 <header>
 	<img src="/logo.svg" alt="" class:minus={clicked}/>
-	<SearchBar bind:clicked={clicked} bind:citys={citys}/>
+	<SearchBar
+		bind:clicked={clicked}
+		bind:citys={citys}
+		bind:people={people}
+		bind:kidPeople={kidPeople}
+		bind:adultPeople={adultPeople}	
+		bind:city={city}
+		fnSearch={fnSearch}
+	/>
 </header>
 
 <style>

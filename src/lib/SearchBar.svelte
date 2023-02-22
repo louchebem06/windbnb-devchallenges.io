@@ -5,6 +5,11 @@
 
 	export let clicked: boolean;
 	export let citys: City[];
+	export let people: number;
+	export let kidPeople: number;
+	export let adultPeople: number;
+	export let city: City;
+	export let fnSearch: any;
 	
 	let selectedLocation: boolean = false;
 	let selectedGuests: boolean = false;
@@ -46,6 +51,7 @@
 		bind:selected={selectedLocation}
 		selectedFn={setLocation}
 		elements={citys}
+		bind:city={city}
 	/>
 	<Select
 		bind:big={clicked}
@@ -53,8 +59,11 @@
 		location={false}
 		bind:selected={selectedGuests}
 		selectedFn={setGuests}
+		bind:mainPeople={people}
+		bind:kidPeople={kidPeople}
+		bind:adultPeople={adultPeople}
 	/>
-	<SearchButton bind:big={clicked} />
+	<SearchButton bind:big={clicked} fnSearch={fnSearch}/>
 </div>
 
 <style>
@@ -125,14 +134,14 @@
 			width: 100%;
 			top: 0;
 			left: 0;
-			height: 20%;
+			height: 55vh;
 			opacity: 1;
 		}
 	}
 
 	.backgroundSearchBar {
 		width: 100%;
-		height: 20%;
+		height: 55vh;
 		background-color: white;
 		z-index: 1;
 		position: absolute;
@@ -166,12 +175,18 @@
 			height: 90vh;
 			animation: none;
 		}
+
+		.big {
+			animation: none;
+			flex-direction: column;
+			height: 113px;
+		}
 	}
 
 	@media screen and (max-width: 500px) {
 		.searchBar {
 			margin: 20px auto;
-			width: 90%;
+			width: 99%;
 		}
 
 		.backgroundSearchBar {

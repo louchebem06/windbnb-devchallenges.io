@@ -9,6 +9,10 @@
 	export let selected: boolean;
 	export let selectedFn: any;
 	export let elements: City[] = [];
+	export let mainPeople: number = 0;
+	export let kidPeople: number = 0;
+	export let adultPeople: number = 0;
+	export let city: City|undefined = undefined;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -16,19 +20,41 @@
 	{#if big}
 		<h3>{title}</h3>
 	{/if}
-	<p class:location={location} class:people={!location}>Coucou</p>
+	<p class:location={location} class:people={!location}>
+		{#if location}
+			{city?.city}, {city?.country}
+		{:else}
+			{#if mainPeople == 0}
+				Add guests
+			{:else if mainPeople == 1}
+				1 guest
+			{:else}
+				{mainPeople} guests
+			{/if}
+		{/if}
+	</p>
 
 	{#if selected && elements.length && big}
-		<div class="elements">
+		<div class="elements-location">
 			{#each elements as element }
-				<LocateElement {element} />
+				<LocateElement {element} bind:city={city}/>
 			{/each}
 		</div>
 	{/if}
 	{#if selected && big && !location}
 		<div class="elements">
-			<People title="Adults" subTitle="Ages 13 or above" value={0}/>
-			<People title="Children" subTitle="Ages 2-12" value={0}/>
+			<People
+				title="Adults"
+				subTitle="Ages 13 or above"
+				bind:people={mainPeople}
+				bind:value={adultPeople}
+			/>
+			<People
+				title="Children"
+				subTitle="Ages 2-12"
+				bind:people={mainPeople}
+				bind:value={kidPeople}
+			/>
 		</div>
 	{/if}
 </div>
@@ -67,7 +93,7 @@
 		}
 	}
 
-	.elements {
+	.elements, .elements-location {
 		--size: 250px;
 		--padding: 25px;
 		position: absolute;
@@ -102,7 +128,6 @@
 	.content h3 {
 		font-weight: 800;
 		font-size: 9px;
-		/* line-height: 11px; */
 		text-transform: uppercase;
 		color: #333333;
 	}
@@ -113,5 +138,36 @@
 
 	.content .people {
 		color: #BDBDBD;
+	}
+
+	@media screen and (max-width: 768px) {
+		.elements, .elements-location {
+			animation: none;
+		}
+
+		.elements-location {
+			bottom: calc(calc(var(--size) + 100px) * -1);
+		}
+
+		.big {
+			width: 100%;
+			padding: 0;
+		}
+
+		.big:nth-of-type(1) {
+			border-bottom: 1px solid #F2F2F2;
+		}
+
+		.selected {
+			border-bottom: 1px solid #333333 !important;
+		}
+
+		.big .location, .big .people, .big h3 {
+			padding-left: 15px;
+		}
+
+		.big p:after {
+			display: none;
+		}
 	}
 </style>
